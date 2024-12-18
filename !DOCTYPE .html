@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour toi ❤️</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fef5f5;
+      font-family: 'Arial', 'Helvetica', 'Microsoft YaHei', sans-serif; /* Ajout de la police de secours */
+      margin: 0;
+    }
+    img {
+      width: 100%;
+      max-width: 500px; /* Limite la taille de l'image si elle est trop grande */
+      height: auto;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    img.hidden {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    img.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    p {
+      font-size: 1.5rem;
+      color: #ff6b6b;
+      margin-top: 20px;
+      text-align: center;
+      transition: opacity 0.3s ease;
+      opacity: 1;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    button:hover {
+      background-color: #ff4c4c;
+    }
+  </style>
+</head>
+<body>
+  <img id="photo" src="moi.jpeg" alt="Clique-moi ❤️" onclick="changePhoto()">
+  <p id="photo-text">Un petit message ici ❤️</p>
+  <button id="music-toggle">暂停 🎵</button>
+  <audio id="background-music" loop>
+    <source src="「YOUR EYES」山下達郎.mp3" type="audio/mpeg">
+    Ton navigateur ne supporte pas la lecture audio.
+  </audio>
+  <script>
+    const photos = ["moi.jpeg", "coeurfermer.jpeg", "coeurouvert.jpeg", "jingjingperenoel.jpeg"];
+    const texts = [
+      "在圣诞倒计时的第一天，你的圣诞老人送给你",
+      "一颗小纸心 ❤️",
+      "心中有你🌟",
+      "你的粘人宝宝💖"
+    ];
+    let currentIndex = 0;
+
+    function changePhoto() {
+      currentIndex = (currentIndex + 1) % photos.length;
+      const photoElement = document.getElementById("photo");
+      const textElement = document.getElementById("photo-text");
+
+      photoElement.classList.add("hidden");
+      textElement.style.opacity = 0;
+
+      setTimeout(() => {
+        photoElement.src = photos[currentIndex];
+        textElement.innerText = texts[currentIndex];
+        photoElement.classList.remove("hidden");
+        textElement.style.opacity = 1;
+      }, 300);
+    }
+
+    const music = document.getElementById("background-music");
+    const musicToggle = document.getElementById("music-toggle");
+
+    musicToggle.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        musicToggle.textContent = "暂停 🎵"; // Bouton "mettre en pause"
+      } else {
+        music.pause();
+        musicToggle.textContent = "点击播放音乐 🎶"; // Bouton "lancer la musique"
+      }
+    });
+  </script>
+</body>
+</html>
